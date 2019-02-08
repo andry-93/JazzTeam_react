@@ -1,6 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+let isProduction = (process.env.NODE_ENV === 'production');
+
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -35,11 +37,33 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(png|gif|jpe?g)$/i,
+        loaders: [
+          {
+            loader: 'file-loader',
+            options: {
+              context: 'src',
+              name: '[path][name].[ext]'
+            }
+          },
+          'img-loader',
+        ]
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-url-loader',
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
-  ],
+    isProduction ?
+      new ImageminPlugin({
+        test: /\.(png|gif|jpe?g|svg)$/i
+      })
+      : false,
+  ].filter(Boolean),
 };
