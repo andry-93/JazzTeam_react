@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import setAuthAction from '../actions/actionAuth';
+import setUserAction from '../actions/actionUser';
 import { auth } from '../dateJSON';
 
 class Login extends Component {
@@ -50,6 +51,7 @@ class Login extends Component {
           error: false
         });
         this.props.setAuthFunction(true);
+        this.props.setUserFunction(auth[i]);
         break;
       } else {
         if (this.state.error !== true) {
@@ -72,6 +74,9 @@ function mapDispatchToProps(dispatch) {
   return {
     setAuthFunction: (authActive) => {
       dispatch(setAuthAction(authActive));
+    },
+    setUserFunction: (authUser) => {
+      dispatch(setUserAction(authUser));
     },
   };
 }

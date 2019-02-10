@@ -4,6 +4,7 @@ import * as Routes from './Routes';
 import '../styles/App.css';
 import Logotype from '../img/logo_jazzteam-300x135.png';
 import Nav from './Nav';
+import User from './User';
 
 export default class App extends Component {
   state = {
@@ -19,9 +20,7 @@ export default class App extends Component {
       <BrowserRouter>
         <div className="main">
           <aside ref={this.getAsideRef}>
-            <div className="img_profile" style={{backgroundImage: "url(https://1ofdmq2n8tc36m6i46scovo2e-wpengine.netdna-ssl.com/wp-content/uploads/2014/04/Steven_Hallam-slide.jpg)"}}>
-              <span className='img_title'>Profile title</span>
-            </div>
+            <User />
             <a href="#" className="close" onClick={this.toggleMenu}>
               <i className="fas fa-times-circle"></i>
             </a>
@@ -59,7 +58,7 @@ export default class App extends Component {
   getBody() {
     if (!this.state.isOpen) {
       if (this._asideEl && this._contentEl) {
-        this._asideEl.style.transform = "translate(-310px)";
+        this._asideEl.style.transform = "translate(-300px)";
         this._contentEl.style.transform = "translate(0px)";
       }
     } else {

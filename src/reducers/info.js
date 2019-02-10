@@ -1,5 +1,6 @@
 const initialState = {
   authActive: false,
+  authUser: {},
 };
 
 export default function authInfo(state = initialState, action) {
@@ -8,6 +9,11 @@ export default function authInfo(state = initialState, action) {
       return {
         ...state,
         authActive: action.payload,
+      };
+    case 'SET_USER':
+      return {
+        ...state,
+        authUser: action.payload,
       };
     default:
       return state;

@@ -4,13 +4,15 @@ export const auth = [
     "username": "admin",
     "password": "12345678",
     "firstName": "Admin",
-    "lastName": "Administrator"
+    "lastName": "APP",
+    "avatar": "https://1ofdmq2n8tc36m6i46scovo2e-wpengine.netdna-ssl.com/wp-content/uploads/2014/04/Steven_Hallam-slide.jpg"
   }, {
     "id": "2",
     "username": "andrei",
     "password": "12345678",
-    "firstName": "Admin",
-    "lastName": "Administrator"
+    "firstName": "Andrei",
+    "lastName": "Zayats",
+    "avatar": "https://pp.userapi.com/c626225/v626225222/439a7/z0PvICcr3JQ.jpg?ava=1"
   },
 ]
 
