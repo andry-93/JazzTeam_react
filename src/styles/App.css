@@ -1,8 +1,40 @@
 @import './Reset.css';
+@import './Media.css';
+
+h1 {
+  font-size: 2em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #DF9F3D;
+}
 
 ol, ul {
-  list-style: inside;
+  list-style-position: inside;
   padding: 0;
+}
+
+ol ol,
+ul ul,
+ol ul,
+ul ol {
+  padding-left: 15px;
+}
+
+a {
+  color: #5992cc;
+}
+
+a:hover {
+  color: #437cb6;
+}
+
+.main {
+  display: flex;
+  min-width: 300px;
+  min-height: 300px;
+  height: 100vh;
+  overflow: hidden;
 }
 
 aside {
@@ -11,7 +43,8 @@ aside {
   background-color: #336699;
   position: fixed;
   height: 100%;
-  opacity: .9;
+  transition: transform .2s linear;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
 aside .close {
@@ -19,11 +52,31 @@ aside .close {
   right: 20px;
   top: 10px;
   color: #E94639;
-  font-size: 20px
+  font-size: 20px;
+  transition: color .2s linear;
 }
 
 aside .close:hover {
   color: #ff5f54
+}
+
+aside .img_profile {
+  width: 100%;
+  height: 150px;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+aside .img_profile .img_title {
+  position: absolute;
+  display: block;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 5px 20px;
+  background-color: rgba(214, 111, 27, 0.63);
+  text-align: center;
 }
 
 nav li {
@@ -34,6 +87,7 @@ nav li a {
   color: #fff;
   display: block;
   padding: 10px 20px;
+  transition: background-color .2s linear;
 }
 
 nav li a:hover {
@@ -43,16 +97,27 @@ nav li a:hover {
   text-decoration: none;
 }
 
+.wrap {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  width: 100%;
+  transition: transform .2s linear;
+}
+
 header {
+  display: flex;
   background-color: #225D96;
   color: #fff;
   padding: 10px 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
 .bars {
   color: #fff;
   font-size: 25px;
   margin-right: 20px;
+  transition: color .2s linear;
 }
 
 .bars:hover {
@@ -61,33 +126,106 @@ header {
 
 .logo {
   display: inline-block;
+  width: 125px;
 }
 
 .logo img {
   max-height: 92px;
   height: auto;
-}
-
-.main {
-  display: flex;
-  min-width: 300px;
-  overflow: hidden;
-}
-
-.wrap {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
   width: 100%;
 }
 
 .content {
   flex: 1;
+  display: flex;
   overflow: auto;
+  padding: 20px 70px;
+}
+
+.content p {
+  text-align: justify;
+}
+
+.login {
+  margin: auto;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #dde0e0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  width: 380px;
+  overflow: hidden;
+}
+
+.login h2 {
+  background-color: #F2F2F2;
   padding: 10px 20px;
+  color: #225D96;
+  text-align: center;
+  border-bottom: solid 1px #ebebeb;
+  text-transform: uppercase;
+}
+
+.login #auth {
+  padding: 0 20px;
+}
+
+.login label {
+  color: #555;
+  display: inline-block;
+  font-size: .8rem;
+}
+
+.login input {
+  outline: none;
+}
+
+.login input[type=name], input[type=password] {
+  color: #777;
+  padding-left: 10px;
+  width: 100%;
+  height: 35px;
+  border: 1px solid #c7d0d2;
+}
+
+.login input[type=name] {
+  margin-bottom: 10px;
+}
+
+.login #lower {
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #F2F2F2;
+  border-top: solid 1px #ebebeb;
+}
+
+.login .login_error {
+  color: red;
+  padding: 0 20px;
+  font-size: .8rem;
+}
+
+.login input[type=submit] {
+  width: 100%;
+  padding: 10px 20px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  background-color: #336699;
+  border: 1px solid #225D96;
+  border-radius: 3px; 
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .5);
+  cursor: pointer;
+  transition: background-color .2s linear;
+}
+
+.login input[type=submit]:hover {
+  background-color: #225D96;
 }
 
 footer {
   background-color: #F2F2F2;
-  padding: 10px 20px;
+  padding: 5px 20px;
+  color: #606060;
+  font-size: .8rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
