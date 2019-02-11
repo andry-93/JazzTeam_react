@@ -222,6 +222,50 @@ header {
   background-color: #225D96;
 }
 
+.sticky-table-header-wrapper {
+  border-bottom: solid 1px #336699;
+  font-weight: bold;
+}
+
+.sticky-table-column > .sticky-table-table {
+  font-weight: bold;
+  border-right: solid 1px #336699;
+}
+
+.sticky-table-corner {
+  border-right: solid 1px #336699;
+}
+
+.sticky-table-cell {
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px;
+}
+
+.edit-td .edit-area {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  resize: none;
+  outline: none;
+  overflow: auto;
+}
+
+.edit-controls {
+  position: absolute;
+}
+
+.edit-td {
+  position: relative;
+  padding: 0;
+}
+
+.row-active {
+  background-color: yellow;
+}
+
 footer {
   background-color: #F2F2F2;
   padding: 5px 20px;

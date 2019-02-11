@@ -39,6 +39,7 @@ export default class App extends Component {
               <Route exact path="/" component={Routes.Home} />
               <Route path="/login" component={Routes.Login} />
               <Route path="/info" component={Routes.Info} />
+              <Route path="/table" component={Routes.Table} />
               <Route path="/profile" component={Routes.Profile} />
             </main>
             <footer>© Copyright</footer>
