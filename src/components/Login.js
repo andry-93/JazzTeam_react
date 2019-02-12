@@ -10,8 +10,39 @@ class Login extends Component {
     error: false,
   }
 
+  onAuthorisation = (event) => {
+    const { props, state } = this;
+    event.preventDefault();
+    const username = document.querySelector('#name').value;
+    const password = document.querySelector('#password').value;
+    for (let i = 0; i < auth.length; i += 1) {
+      if ((auth[i].username === username) && (auth[i].password === password)) {
+        this.setState({
+          error: false,
+        });
+        props.setAuthFunction(true);
+        props.setUserFunction(auth[i]);
+        break;
+      } else if (state.error !== true) {
+        this.setState({
+          error: true,
+        });
+      }
+    }
+  }
+
+  getError() {
+    const { state } = this;
+    if (state.error) {
+      return (
+        <div className="login_error">Имя пользователя или пароль введены неверно</div>
+      );
+    } return undefined;
+  }
+
   render() {
-    if(this.props.authActive === true) {
+    const { props } = this;
+    if (props.authActive === true) {
       return (<Redirect to="/profile" />);
     }
     return (
@@ -19,48 +50,25 @@ class Login extends Component {
         <form>
           <h2>Please login</h2>
           <div id="auth">
-            <label>Username:</label><br/>
-            <input type="name" placeholder="username..." id="name"/><br/>
-            <label>Password:</label><br/>
-            <input type="password" placeholder="password..." id="password"/>
+            <label htmlFor="name">
+              Username:
+              <br />
+              <input type="name" placeholder="username..." id="name" />
+            </label>
+            <br />
+            <label htmlFor="password">
+              Password:
+              <br />
+              <input type="password" placeholder="password..." id="password" />
+            </label>
           </div>
           {this.getError()}
           <div id="lower">
-            <input type="submit" onClick={this.onAuthorisation} value="Login"/>
+            <input type="submit" onClick={this.onAuthorisation} value="Login" />
           </div>
         </form>
       </div>
     );
-  }
-
-  getError() {
-    if (this.state.error) {
-      return (
-        <div className="login_error">Имя пользователя или пароль введены неверно</div>
-      )
-    } return undefined;
-  }
-
-  onAuthorisation = (event) => {
-    event.preventDefault();
-    const username = document.querySelector("#name").value,
-      password = document.querySelector("#password").value;
-    for (let i = 0; i < auth.length; i++) {
-      if ((auth[i].username === username)&&(auth[i].password === password)) {
-        this.setState({
-          error: false
-        });
-        this.props.setAuthFunction(true);
-        this.props.setUserFunction(auth[i]);
-        break;
-      } else {
-        if (this.state.error !== true) {
-          this.setState({
-            error: true
-          });
-        }
-      }
-    }
   }
 }
 

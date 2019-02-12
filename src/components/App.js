@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Link, BrowserRouter, Route } from 'react-router-dom';
 import * as Routes from './Routes';
 import '../styles/App.css';
@@ -11,28 +11,57 @@ export default class App extends Component {
     isOpen: false,
   }
 
-  getAsideRef = (node) => { this._asideEl = node };
-  getContentRef = (node) => { this._contentEl = node };
+  componentDidMount() {
+    this.getBody();
+  }
+
+  componentDidUpdate() {
+    this.getBody();
+  }
+
+  getAsideRef = (node) => { this.asideEl = node; };
+
+  getContentRef = (node) => { this.contentEl = node; };
+
+  getBody() {
+    const { state } = this;
+    if (!state.isOpen) {
+      if (this.asideEl && this.contentEl) {
+        this.asideEl.style.transform = 'translate(-300px)';
+        this.contentEl.style.transform = 'translate(0px)';
+      }
+    } else if (this.asideEl && this.contentEl) {
+      this.asideEl.style.transform = 'translate(0px)';
+      this.contentEl.style.transform = 'translate(300px)';
+    }
+  }
+
+  toggleMenu = (event) => {
+    const { isOpen } = this.state;
+    event.preventDefault();
+    this.setState({
+      isOpen: !isOpen,
+    });
+  }
 
   render() {
-    
     return (
       <BrowserRouter>
         <div className="main">
           <aside ref={this.getAsideRef}>
             <User />
             <a href="#" className="close" onClick={this.toggleMenu}>
-              <i className="fas fa-times-circle"></i>
+              <i className="fas fa-times-circle" />
             </a>
             <Nav />
           </aside>
           <div className="wrap" ref={this.getContentRef}>
             <header>
               <a href="#" className="bars" onClick={this.toggleMenu}>
-                <i className="fas fa-bars"></i>
+                <i className="fas fa-bars" />
               </a>
               <Link to="/" className="logo">
-                <img src={Logotype} alt="JazzTeam"/>
+                <img src={Logotype} alt="JazzTeam" />
               </Link>
             </header>
             <main className="content">
@@ -47,33 +76,5 @@ export default class App extends Component {
         </div>
       </BrowserRouter>
     );
-  }
-
-  toggleMenu = (event) => {
-    event.preventDefault()
-		this.setState({
-			isOpen: !this.state.isOpen
-		})
-  }
-
-  getBody() {
-    if (!this.state.isOpen) {
-      if (this._asideEl && this._contentEl) {
-        this._asideEl.style.transform = "translate(-300px)";
-        this._contentEl.style.transform = "translate(0px)";
-      }
-    } else {
-      if (this._asideEl && this._contentEl) {
-        this._asideEl.style.transform = "translate(0px)";
-        this._contentEl.style.transform = "translate(300px)";
-      }
-    }
-  }
-  
-  componentDidUpdate() {
-    this.getBody()
-  }
-  componentDidMount() {
-    this.getBody()
   }
 }

@@ -1,17 +1,133 @@
 import React, { Component } from 'react';
 
+import { Redirect } from 'react-router';
+import { connect } from 'react-redux';
 import { StickyTable, Row, Cell } from 'react-sticky-table';
 import 'react-sticky-table/dist/react-sticky-table.css';
 import { auth } from '../dateJSON';
 
-export default class Table extends Component {
+class Table extends Component {
   state = {
     editingTd: null,
     rowsSelect: [],
-    rows: auth
+    rows: auth,
+  }
+
+  onClickCell = (event) => {
+    const { target } = event;
+    const { state } = this;
+    if (target.className.trim() === 'edit-cancel') {
+      this.finishTdEdit(state.editingTd.elem, false);
+    }
+    if (target.className.trim() === 'edit-ok') {
+      this.finishTdEdit(state.editingTd.elem, true);
+    }
+    if (target.parentNode.classList.contains('sticky-table-row')) {
+      if (event.ctrlKey) {
+        this.selectRow(target.parentNode);
+      }
+    }
+  }
+
+  editCell = (event) => {
+    const { target } = event;
+    const { state } = this;
+    if (target.classList.contains('sticky-table-cell')) {
+      if (state.editingTd) return;
+      this.makeTdEditable(target);
+    }
+  }
+
+  selectRow(el) {
+    const { state } = this;
+    if (!el.classList.contains('row-active')) {
+      this.setState({
+        rowsSelect: [...state.rowsSelect, el],
+      });
+      el.classList.add('row-active');
+    } else {
+      el.classList.remove('row-active');
+      const rowsSelect = [...state.rowsSelect];
+
+
+      const index = rowsSelect.indexOf(el);
+      if (index !== -1) {
+        rowsSelect.splice(index, 1);
+        this.setState({ rowsSelect });
+      }
+    }
+  }
+
+  showList() {
+    const { state } = this;
+    return state.rows.map(user => (
+      <Row key={user.id}>
+        <Cell>{user.id}</Cell>
+        <Cell>{user.username}</Cell>
+        <Cell>{user.password}</Cell>
+        <Cell>{user.firstName}</Cell>
+        <Cell>{user.lastName}</Cell>
+        <Cell><img src={user.avatar} height="50" alt={user.username} /></Cell>
+        <Cell>{user.avatar}</Cell>
+      </Row>
+    ));
+  }
+
+  showState() {
+    const { state } = this;
+    return (
+      <div className="stateTable">
+        <strong>State:</strong>
+        {' '}
+        {state.rows.length}
+        /
+        {state.rowsSelect.length}
+      </div>
+    );
+  }
+
+  makeTdEditable(TD) {
+    const td = TD;
+    this.setState({
+      editingTd: {
+        elem: td,
+        data: td.innerHTML,
+      },
+    });
+
+    td.classList.add('edit-td');
+
+    const textArea = document.createElement('textarea');
+    textArea.style.width = `${td.clientWidth}px`;
+    textArea.style.height = `${td.clientHeight}px`;
+    textArea.className = 'edit-area';
+
+    textArea.value = td.innerHTML;
+    td.innerHTML = '';
+    td.appendChild(textArea);
+    textArea.focus();
+
+    td.insertAdjacentHTML('beforeEnd',
+      '<div class="edit-controls"><button class="edit-ok">OK</button><button class="edit-cancel">CANCEL</button></div>');
+  }
+
+  finishTdEdit(TD, isOk) {
+    const { state } = this;
+    const td = TD;
+    if (isOk) {
+      td.innerHTML = td.firstChild.value;
+    } else {
+      td.innerHTML = state.editingTd.data;
+    }
+    td.classList.remove('edit-td');
+    this.state.editingTd = null;
   }
 
   render() {
+    const { props } = this;
+    if (props.authActive === false) {
+      return (<Redirect to="/login" />);
+    }
     return (
       <section className="full-section">
         <h1>Таблицы</h1>
@@ -23,7 +139,7 @@ export default class Table extends Component {
         </ol>
         <h2>Содержимое таблицы</h2>
         <p>В качестве содержимого таблицы, были выбраны данные пользователей, которые используются для авторизации.</p>
-        <div onClick={this.onClickCell} onDoubleClick={this.editCell} style={{width: '100%', height: '400px'}}>
+        <div onClick={this.onClickCell} onDoubleClick={this.editCell} style={{ width: '100%', height: '400px' }}>
           <StickyTable>
             <Row>
               <Cell>ID</Cell>
@@ -39,106 +155,15 @@ export default class Table extends Component {
         </div>
         { this.showState() }
       </section>
-    )
-  }
-
-  showState() {
-    const { state } = this;
-    return (
-      <div className="stateTable">
-        <strong>State:</strong> {this.state.rows.length}/{this.state.rowsSelect.length}
-      </div>
     );
-  }
-
-  showList() {
-    const { state } = this;
-    return state.rows.map(auth => (
-      <Row key={auth.id}>
-        <Cell>{auth.id}</Cell>
-        <Cell>{auth.username}</Cell>
-        <Cell>{auth.password}</Cell>
-        <Cell>{auth.firstName}</Cell>
-        <Cell>{auth.lastName}</Cell>
-        <Cell><img src={auth.avatar} height="50" alt={auth.username}/></Cell>
-        <Cell>{auth.avatar}</Cell>
-      </Row>
-    ));
-  }
-
-  selectRow(el) {
-    if (!el.classList.contains('row-active')) {
-      this.setState({
-        rowsSelect: [...this.state.rowsSelect, el]
-      })
-      el.classList.add('row-active');
-    } else {
-      el.classList.remove('row-active');
-      let rowsSelect = [...this.state.rowsSelect],
-        index = rowsSelect.indexOf(el);
-      if (index !== -1) {
-        rowsSelect.splice(index, 1);
-        this.setState({rowsSelect: rowsSelect});
-      }
-    }
-  }
-
-  onClickCell = (event) => {
-    let target = event.target;
-    if (target.className.trim() == 'edit-cancel') {
-      this.finishTdEdit(this.state.editingTd.elem, false);
-    }
-    if (target.className.trim() == 'edit-ok') {
-      this.finishTdEdit(this.state.editingTd.elem, true);
-    }
-    if (target.parentNode.classList.contains('sticky-table-row')) {
-      if (event.ctrlKey) {
-        this.selectRow(target.parentNode)
-      }
-    }
-  }
-
-  editCell = (event) => {
-    let target = event.target;
-    if (target.classList.contains('sticky-table-cell')) {
-      if (this.state.editingTd) return;
-      this.makeTdEditable(target);
-      target = target.parentNode;
-    }
-  }
-
-  makeTdEditable(td) {
-    this.setState({
-			editingTd: {
-        elem: td,
-        data: td.innerHTML
-      }
-		})
-
-    td.classList.add('edit-td');
-
-    let textArea = document.createElement('textarea');
-    textArea.style.width = td.clientWidth + 'px';
-    textArea.style.height = td.clientHeight + 'px';
-    textArea.className = 'edit-area';
-
-    textArea.value = td.innerHTML;
-    td.innerHTML = '';
-    td.appendChild(textArea);
-    textArea.focus();
-
-    td.insertAdjacentHTML("beforeEnd",
-      '<div class="edit-controls"><button class="edit-ok">OK</button><button class="edit-cancel">CANCEL</button></div>'
-    );
-  }
-
-  finishTdEdit(td, isOk) {
-    if (isOk) {
-      td.innerHTML = td.firstChild.value;
-    } else {
-      td.innerHTML = this.state.editingTd.data;
-    }
-    td.classList.remove('edit-td');
-    this.state.editingTd = null;
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    authActive: state.authInfo.authActive,
+    authUser: state.authInfo.authUser,
+  };
+}
+
+export default connect(mapStateToProps)(Table);

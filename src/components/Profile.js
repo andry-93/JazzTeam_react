@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 function Profile(props) {
   const prop = props;
-  if(prop.authActive === false) {
+  if (prop.authActive === false) {
     return (<Redirect to="/login" />);
   }
   return (
@@ -33,7 +33,7 @@ function Profile(props) {
 function mapStateToProps(state) {
   return {
     authActive: state.authInfo.authActive,
-    authUser: state.authInfo.authUser
+    authUser: state.authInfo.authUser,
   };
 }
 

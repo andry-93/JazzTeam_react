@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-let isProduction = (process.env.NODE_ENV === 'production');
+const isProduction = (process.env.NODE_ENV === 'production');
 
 module.exports = {
   entry: './src/index.js',
@@ -19,11 +19,11 @@ module.exports = {
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
-      /* {
+      /*{
         test: /\.js$/,
         exclude: /node_modules/,
-        use: ["eslint-loader"]
-      }, */
+        use: ['eslint-loader'],
+      },*/
       {
         test: /\.css$/,
         use: [
@@ -44,11 +44,11 @@ module.exports = {
             loader: 'file-loader',
             options: {
               context: 'src',
-              name: '[path][name].[ext]'
-            }
+              name: '[path][name].[ext]',
+            },
           },
           'img-loader',
-        ]
+        ],
       },
       {
         test: /\.svg$/,
@@ -60,8 +60,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
-    isProduction ?
-      new ImageminPlugin({
+    isProduction
+      ? new ImageminPlugin({
         test: /\.(png|gif|jpe?g|svg)$/i
       })
       : false,
