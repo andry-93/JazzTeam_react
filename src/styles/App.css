@@ -245,6 +245,10 @@ header {
   font-weight: bold;
 }
 
+.sticky-table-x-wrapper .sticky-table-row:hover {
+  background-color: rgb(233, 233, 233);
+}
+
 .sticky-table-column > .sticky-table-table {
   font-weight: bold;
   border-right: solid 1px #336699;
