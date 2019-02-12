@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Home() {
   return (
-    <section>
+    <section className="full-section">
       <h1>Who we are</h1>
       <h2>History of company creation</h2>
       <p>

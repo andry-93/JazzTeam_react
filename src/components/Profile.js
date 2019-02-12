@@ -8,7 +8,7 @@ function Profile(props) {
     return (<Redirect to="/login" />);
   }
   return (
-    <section>
+    <section className="full-section">
       <h1>Profile</h1>
       <table>
         <tbody>

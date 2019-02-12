@@ -146,6 +146,10 @@ header {
   text-align: justify;
 }
 
+.full-section {
+  width: 100%;
+}
+
 .login {
   margin: auto;
   background-color: #fff;
@@ -222,7 +226,24 @@ header {
   background-color: #225D96;
 }
 
+.sticky-table {
+  background-color: #F2F2F2;
+}
+
+.stateTable {
+  background-color: rgb(233, 233, 233);
+  padding: 5px 10px;
+}
+
 .sticky-table-header-wrapper {
+  background-color: #DF9F3D;
+}
+
+.sticky-table-column {
+  background-color: #336699;
+}
+
+.sticky-table-header-wrapper > .sticky-table-header {
   border-bottom: solid 1px #336699;
   font-weight: bold;
 }
@@ -232,8 +253,13 @@ header {
   border-right: solid 1px #336699;
 }
 
+.sticky-table-column *, .sticky-table-corner *, .sticky-table-header-wrapper * {
+  pointer-events: none;
+}
+
 .sticky-table-corner {
-  border-right: solid 1px #336699;
+  font-weight: bold;
+  border-bottom: solid 1px #336699;
 }
 
 .sticky-table-cell {
@@ -260,6 +286,37 @@ header {
 .edit-td {
   position: relative;
   padding: 0;
+}
+
+.edit-ok, .edit-cancel {
+  font-size: 14px;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #336699;
+  border: 1px solid #225D96;
+  border-radius: 0px; 
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .5);
+  cursor: pointer;
+  transition: background-color .2s linear;
+}
+
+.edit-ok {
+  background-color: #40b63c;
+  border: 1px solid #289624;
+}
+
+.edit-cancel {
+  background-color: #b63c3c;
+  border: 1px solid #942323;
+}
+
+.edit-ok:hover {
+  background-color: #289624;
+}
+
+.edit-cancel:hover {
+  background-color: #942323;
 }
 
 .row-active {
