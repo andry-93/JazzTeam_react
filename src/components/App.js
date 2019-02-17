@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import * as Routes from './Routes';
 import '../styles/App.css';
-import Nav from './Nav';
-import User from './User';
 import Header from './Header';
+import Sidebar from './Sidebar';
 
 export default class App extends Component {
   state = {
@@ -49,11 +48,7 @@ export default class App extends Component {
       <BrowserRouter>
         <div className="main">
           <aside ref={this.getAsideRef}>
-            <User />
-            <button type="button" className="close" onClick={this.toggleMenu}>
-              <i className="fas fa-times-circle" />
-            </button>
-            <Nav />
+            <Sidebar toggleMenu={this.toggleMenu} />
           </aside>
           <div className="wrap" ref={this.getContentRef}>
             <Header toggleMenu={this.toggleMenu} />
