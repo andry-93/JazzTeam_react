@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Link, BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import * as Routes from './Routes';
 import '../styles/App.css';
-import Logotype from '../img/logo_jazzteam-300x135.png';
 import Nav from './Nav';
 import User from './User';
+import Header from './Header';
 
 export default class App extends Component {
   state = {
@@ -50,20 +50,13 @@ export default class App extends Component {
         <div className="main">
           <aside ref={this.getAsideRef}>
             <User />
-            <a href="#" className="close" onClick={this.toggleMenu}>
+            <button type="button" className="close" onClick={this.toggleMenu}>
               <i className="fas fa-times-circle" />
-            </a>
+            </button>
             <Nav />
           </aside>
           <div className="wrap" ref={this.getContentRef}>
-            <header>
-              <a href="#" className="bars" onClick={this.toggleMenu}>
-                <i className="fas fa-bars" />
-              </a>
-              <Link to="/" className="logo">
-                <img src={Logotype} alt="JazzTeam" />
-              </Link>
-            </header>
+            <Header toggleMenu={this.toggleMenu} />
             <main className="content">
               <Route exact path="/" component={Routes.Home} />
               <Route path="/login" component={Routes.Login} />
