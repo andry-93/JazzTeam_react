@@ -79,7 +79,7 @@ class Table extends Component {
         <strong>State:</strong>
         {' '}
         {state.rows.length}
-        /
+        <span>/</span>
         {state.rowsSelect.length}
       </div>
     );

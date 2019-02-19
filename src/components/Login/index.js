@@ -65,13 +65,13 @@ class Login extends Component {
           <h2>Please login</h2>
           <div id="auth">
             <label htmlFor="name">
-              Username:
+              <span>Username:</span>
               <br />
               <input type="name" value={state.login} onChange={evt => this.updateLogin(evt)} placeholder="username..." id="name" />
             </label>
             <br />
             <label htmlFor="password">
-              Password:
+              <span>Password:</span>
               <br />
               <input type="password" value={state.password} onChange={evt => this.updatePassword(evt)} placeholder="password..." id="password" />
             </label>

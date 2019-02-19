@@ -9,7 +9,7 @@ export default function Info() {
       <ol type="1">
         <li>JavaScript</li>
         <li>
-          Web-фреймворк на выбор:
+          <span>Web-фреймворк на выбор:</span>
           <ol type="a">
             <li>React/Redux</li>
             <li>Angular/NgRx</li>
