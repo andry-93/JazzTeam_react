@@ -31,7 +31,7 @@ class Login extends Component {
     }
   }
 
-  getError() {
+  getError = () => {
     const { state } = this;
     if (state.error) {
       return (
@@ -72,21 +72,17 @@ class Login extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    authActive: state.authInfo.authActive,
-  };
-}
+const mapStateToProps = state => ({
+  authActive: state.authInfo.authActive,
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    setAuthFunction: (authActive) => {
-      dispatch(setAuthAction(authActive));
-    },
-    setUserFunction: (authUser) => {
-      dispatch(setUserAction(authUser));
-    },
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  setAuthFunction: (authActive) => {
+    dispatch(setAuthAction(authActive));
+  },
+  setUserFunction: (authUser) => {
+    dispatch(setUserAction(authUser));
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

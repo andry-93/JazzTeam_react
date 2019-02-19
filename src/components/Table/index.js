@@ -38,7 +38,7 @@ class Table extends Component {
     }
   }
 
-  selectRow(el) {
+  selectRow = (el) => {
     const { state } = this;
     if (!el.classList.contains('row-active')) {
       this.setState({
@@ -48,8 +48,6 @@ class Table extends Component {
     } else {
       el.classList.remove('row-active');
       const rowsSelect = [...state.rowsSelect];
-
-
       const index = rowsSelect.indexOf(el);
       if (index !== -1) {
         rowsSelect.splice(index, 1);
@@ -58,7 +56,7 @@ class Table extends Component {
     }
   }
 
-  showList() {
+  showList = () => {
     const { state } = this;
     return state.rows.map(user => (
       <Row key={user.id}>
@@ -73,7 +71,7 @@ class Table extends Component {
     ));
   }
 
-  showState() {
+  showState = () => {
     const { state } = this;
     return (
       <div className="stateTable">
@@ -86,7 +84,7 @@ class Table extends Component {
     );
   }
 
-  makeTdEditable(TD) {
+  makeTdEditable = (TD) => {
     const td = TD;
     this.setState({
       editingTd: {
@@ -111,7 +109,7 @@ class Table extends Component {
       '<div class="edit-controls"><button class="edit-ok">OK</button><button class="edit-cancel">CANCEL</button></div>');
   }
 
-  finishTdEdit(TD, isOk) {
+  finishTdEdit = (TD, isOk) => {
     const { state } = this;
     const td = TD;
     if (isOk) {
@@ -159,11 +157,9 @@ class Table extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    authActive: state.authInfo.authActive,
-    authUser: state.authInfo.authUser,
-  };
-}
+const mapStateToProps = state => ({
+  authActive: state.authInfo.authActive,
+  authUser: state.authInfo.authUser,
+});
 
 export default connect(mapStateToProps)(Table);

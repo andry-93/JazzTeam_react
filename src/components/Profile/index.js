@@ -30,11 +30,9 @@ function Profile(props) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    authActive: state.authInfo.authActive,
-    authUser: state.authInfo.authUser,
-  };
-}
+const mapStateToProps = state => ({
+  authActive: state.authInfo.authActive,
+  authUser: state.authInfo.authUser,
+});
 
 export default connect(mapStateToProps)(Profile);

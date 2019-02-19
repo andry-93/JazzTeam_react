@@ -11,18 +11,26 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    this.getBody();
+    this.showMenu();
   }
 
   componentDidUpdate() {
-    this.getBody();
+    this.showMenu();
   }
 
   getAsideRef = (node) => { this.asideEl = node; };
 
   getContentRef = (node) => { this.contentEl = node; };
 
-  getBody() {
+  toggleMenu = (event) => {
+    const { isOpen } = this.state;
+    event.preventDefault();
+    this.setState({
+      isOpen: !isOpen,
+    });
+  }
+
+  showMenu = () => {
     const { state } = this;
     if (!state.isOpen) {
       if (this.asideEl && this.contentEl) {
@@ -33,15 +41,7 @@ export default class App extends Component {
       this.asideEl.style.transform = 'translate(0px)';
       this.contentEl.style.transform = 'translate(0px)';
     }
-  }
-
-  toggleMenu = (event) => {
-    const { isOpen } = this.state;
-    event.preventDefault();
-    this.setState({
-      isOpen: !isOpen,
-    });
-  }
+  };
 
   render() {
     return (
