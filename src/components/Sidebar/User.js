@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+/**
+ * @return {null}
+ */
 function User(props) {
   const prop = props;
   if (prop.authActive === false) {

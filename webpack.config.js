@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin');
 
 const isProduction = (process.env.NODE_ENV === 'production');
 
@@ -19,11 +20,11 @@ module.exports = {
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
-      /*{
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: ['eslint-loader'],
-      },*/
+      },
       {
         test: /\.css$/,
         use: [
@@ -62,7 +63,7 @@ module.exports = {
     }),
     isProduction
       ? new ImageminPlugin({
-        test: /\.(png|gif|jpe?g|svg)$/i
+        test: /\.(png|gif|jpe?g|svg)$/i,
       })
       : false,
   ].filter(Boolean),

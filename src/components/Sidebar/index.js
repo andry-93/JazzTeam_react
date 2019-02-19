@@ -1,11 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Nav from './Nav';
 import User from './User';
 
 export default function Sidebar(props) {
-  const prop = props;
-  const { toggleMenu } = prop;
+  const { toggleMenu } = props;
   return (
     <div>
       <User />
@@ -16,3 +16,7 @@ export default function Sidebar(props) {
     </div>
   );
 }
+
+Sidebar.propTypes = {
+  toggleMenu: PropTypes.func.isRequired,
+};

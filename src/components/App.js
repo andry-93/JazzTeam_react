@@ -31,7 +31,7 @@ export default class App extends Component {
       }
     } else if (this.asideEl && this.contentEl) {
       this.asideEl.style.transform = 'translate(0px)';
-      this.contentEl.style.transform = 'translate(300px)';
+      this.contentEl.style.transform = 'translate(0px)';
     }
   }
 

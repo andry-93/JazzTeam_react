@@ -1,4 +1,4 @@
-export const auth = [
+const auth = [
   {
     id: '1',
     username: 'admin',
@@ -43,3 +43,5 @@ export const auth = [
     avatar: 'https://1ofdmq2n8tc36m6i46scovo2e-wpengine.netdna-ssl.com/wp-content/uploads/2014/04/Steven_Hallam-slide.jpg',
   },
 ];
+
+export { auth as default };

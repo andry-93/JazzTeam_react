@@ -4,7 +4,7 @@ import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { StickyTable, Row, Cell } from 'react-sticky-table';
 import 'react-sticky-table/dist/react-sticky-table.css';
-import { auth } from '../dateJSON';
+import auth from '../../dateJSON';
 
 class Table extends Component {
   state = {
@@ -139,7 +139,7 @@ class Table extends Component {
         </ol>
         <h2>Содержимое таблицы</h2>
         <p>В качестве содержимого таблицы, были выбраны данные пользователей, которые используются для авторизации.</p>
-        <div onClick={this.onClickCell} onDoubleClick={this.editCell} style={{ width: '100%', height: '400px' }}>
+        <div role="grid" tabIndex={0} onClick={this.onClickCell} onKeyDown={this.onClickCell} onDoubleClick={this.editCell} style={{ width: '100%', height: '400px' }}>
           <StickyTable>
             <Row>
               <Cell>ID</Cell>

@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
-import Logotype from '../img/logo_jazzteam-300x135.png';
+import PropTypes from 'prop-types';
+import Logotype from '../../img/logo_jazzteam-300x135.png';
 
 export default function Header(props) {
-  const prop = props;
-  const { toggleMenu } = prop;
+  const { toggleMenu } = props;
   return (
     <header>
       <button type="button" className="bars" onClick={toggleMenu}>
@@ -17,3 +17,7 @@ export default function Header(props) {
     </header>
   );
 }
+
+Header.propTypes = {
+  toggleMenu: PropTypes.func.isRequired,
+};
