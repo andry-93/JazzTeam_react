@@ -4,19 +4,21 @@ import { connect } from 'react-redux';
 import setAuthAction from '../../actions/actionAuth';
 import setUserAction from '../../actions/actionUser';
 import auth from '../../dateJSON';
+import './style.css';
 
 class Login extends Component {
   state = {
     error: false,
+    login: '',
+    password: '',
   }
 
   onAuthorisation = (event) => {
     const { props, state } = this;
     event.preventDefault();
-    const username = document.querySelector('#name').value;
-    const password = document.querySelector('#password').value;
+    const { login, password } = state;
     for (let i = 0; i < auth.length; i += 1) {
-      if ((auth[i].username === username) && (auth[i].password === password)) {
+      if ((auth[i].username === login) && (auth[i].password === password)) {
         this.setState({
           error: false,
         });
@@ -40,8 +42,20 @@ class Login extends Component {
     } return undefined;
   }
 
+  updateLogin = (evt) => {
+    this.setState({
+      login: evt.target.value,
+    });
+  }
+
+  updatePassword = (evt) => {
+    this.setState({
+      password: evt.target.value,
+    });
+  }
+
   render() {
-    const { props } = this;
+    const { props, state } = this;
     if (props.authActive === true) {
       return (<Redirect to="/profile" />);
     }
@@ -53,13 +67,13 @@ class Login extends Component {
             <label htmlFor="name">
               Username:
               <br />
-              <input type="name" placeholder="username..." id="name" />
+              <input type="name" value={state.login} onChange={evt => this.updateLogin(evt)} placeholder="username..." id="name" />
             </label>
             <br />
             <label htmlFor="password">
               Password:
               <br />
-              <input type="password" placeholder="password..." id="password" />
+              <input type="password" value={state.password} onChange={evt => this.updatePassword(evt)} placeholder="password..." id="password" />
             </label>
           </div>
           {this.getError()}

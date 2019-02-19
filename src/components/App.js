@@ -44,14 +44,15 @@ export default class App extends Component {
   };
 
   render() {
+    const { getAsideRef, toggleMenu, getContentRef } = this;
     return (
       <BrowserRouter>
         <div className="main">
-          <aside ref={this.getAsideRef}>
-            <Sidebar toggleMenu={this.toggleMenu} />
+          <aside ref={getAsideRef}>
+            <Sidebar toggleMenu={toggleMenu} />
           </aside>
-          <div className="wrap" ref={this.getContentRef}>
-            <Header toggleMenu={this.toggleMenu} />
+          <div className="wrap" ref={getContentRef}>
+            <Header toggleMenu={toggleMenu} />
             <main className="content">
               <Route exact path="/" component={Routes.Home} />
               <Route path="/login" component={Routes.Login} />

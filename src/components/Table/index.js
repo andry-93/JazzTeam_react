@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { StickyTable, Row, Cell } from 'react-sticky-table';
 import 'react-sticky-table/dist/react-sticky-table.css';
 import auth from '../../dateJSON';
+import './style.css';
 
 class Table extends Component {
   state = {

@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Logotype from '../../img/logo_jazzteam-300x135.png';
+import './style.css';
 
 export default function Header(props) {
   const { toggleMenu } = props;

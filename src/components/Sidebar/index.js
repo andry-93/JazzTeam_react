@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Nav from './Nav';
 import User from './User';
+import './style.css';
 
 export default function Sidebar(props) {
   const { toggleMenu } = props;
