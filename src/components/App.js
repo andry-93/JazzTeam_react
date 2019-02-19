@@ -20,8 +20,6 @@ export default class App extends Component {
 
   getAsideRef = (node) => { this.asideEl = node; };
 
-  getContentRef = (node) => { this.contentEl = node; };
-
   toggleMenu = (event) => {
     const { isOpen } = this.state;
     event.preventDefault();
@@ -33,25 +31,23 @@ export default class App extends Component {
   showMenu = () => {
     const { state } = this;
     if (!state.isOpen) {
-      if (this.asideEl && this.contentEl) {
-        this.asideEl.style.transform = 'translate(-300px)';
-        this.contentEl.style.transform = 'translate(0px)';
+      if (this.asideEl) {
+        this.asideEl.classList.add('hide_aside');
       }
-    } else if (this.asideEl && this.contentEl) {
-      this.asideEl.style.transform = 'translate(0px)';
-      this.contentEl.style.transform = 'translate(0px)';
+    } else if (this.asideEl) {
+      this.asideEl.classList.remove('hide_aside');
     }
   };
 
   render() {
-    const { getAsideRef, toggleMenu, getContentRef } = this;
+    const { getAsideRef, toggleMenu } = this;
     return (
       <BrowserRouter>
         <div className="main">
           <aside ref={getAsideRef}>
             <Sidebar toggleMenu={toggleMenu} />
           </aside>
-          <div className="wrap" ref={getContentRef}>
+          <div className="wrap">
             <Header toggleMenu={toggleMenu} />
             <main className="content">
               <Route exact path="/" component={Routes.Home} />

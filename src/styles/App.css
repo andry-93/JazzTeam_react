@@ -48,6 +48,10 @@ aside {
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
+.hide_aside {
+  transform: translate(-300px);
+}
+
 .wrap {
   display: flex;
   min-height: 100vh;
