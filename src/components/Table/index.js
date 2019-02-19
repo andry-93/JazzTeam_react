@@ -12,7 +12,7 @@ class Table extends Component {
     editingTd: null,
     rowsSelect: [],
     rows: auth,
-  }
+  };
 
   onClickCell = (event) => {
     const { target } = event;
@@ -28,7 +28,7 @@ class Table extends Component {
         this.selectRow(target.parentNode);
       }
     }
-  }
+  };
 
   editCell = (event) => {
     const { target } = event;
@@ -55,7 +55,7 @@ class Table extends Component {
         this.setState({ rowsSelect });
       }
     }
-  }
+  };
 
   showList = () => {
     const { state } = this;
@@ -70,7 +70,7 @@ class Table extends Component {
         <Cell>{user.avatar}</Cell>
       </Row>
     ));
-  }
+  };
 
   showState = () => {
     const { state } = this;
@@ -83,7 +83,7 @@ class Table extends Component {
         {state.rowsSelect.length}
       </div>
     );
-  }
+  };
 
   makeTdEditable = (TD) => {
     const td = TD;
@@ -108,7 +108,7 @@ class Table extends Component {
 
     td.insertAdjacentHTML('beforeEnd',
       '<div class="edit-controls"><button class="edit-ok">OK</button><button class="edit-cancel">CANCEL</button></div>');
-  }
+  };
 
   finishTdEdit = (TD, isOk) => {
     const { state } = this;
@@ -120,7 +120,7 @@ class Table extends Component {
     }
     td.classList.remove('edit-td');
     this.state.editingTd = null;
-  }
+  };
 
   render() {
     const { props } = this;

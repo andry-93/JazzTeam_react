@@ -11,7 +11,7 @@ class Login extends Component {
     error: false,
     login: '',
     password: '',
-  }
+  };
 
   onAuthorisation = (event) => {
     const { props, state } = this;
@@ -31,7 +31,7 @@ class Login extends Component {
         });
       }
     }
-  }
+  };
 
   getError = () => {
     const { state } = this;
@@ -40,19 +40,19 @@ class Login extends Component {
         <div className="login_error">Имя пользователя или пароль введены неверно</div>
       );
     } return undefined;
-  }
+  };
 
   updateLogin = (evt) => {
     this.setState({
       login: evt.target.value,
     });
-  }
+  };
 
   updatePassword = (evt) => {
     this.setState({
       password: evt.target.value,
     });
-  }
+  };
 
   render() {
     const { props, state } = this;

@@ -8,7 +8,7 @@ import Sidebar from './Sidebar';
 export default class App extends Component {
   state = {
     isOpen: false,
-  }
+  };
 
   componentDidMount() {
     this.showMenu();
@@ -28,7 +28,7 @@ export default class App extends Component {
     this.setState({
       isOpen: !isOpen,
     });
-  }
+  };
 
   showMenu = () => {
     const { state } = this;
