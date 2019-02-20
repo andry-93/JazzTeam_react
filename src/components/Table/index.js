@@ -17,14 +17,18 @@ class Table extends Component {
   onClickCell = (event) => {
     const { target } = event;
     const { state } = this;
-    if (target.className.trim() === 'edit-cancel') {
-      this.finishTdEdit(state.editingTd.elem, false);
+    switch (target.className.trim()) {
+      case 'edit-cancel':
+        this.finishTdEdit(state.editingTd.elem, false);
+        break;
+      case 'edit-ok':
+        this.finishTdEdit(state.editingTd.elem, true);
+        break;
+      default:
+        break;
     }
-    if (target.className.trim() === 'edit-ok') {
-      this.finishTdEdit(state.editingTd.elem, true);
-    }
-    if (target.parentNode.classList.contains('sticky-table-row')) {
-      if (event.ctrlKey) {
+    if (event.ctrlKey) {
+      if (target.parentNode.classList.contains('sticky-table-row')) {
         this.selectRow(target.parentNode);
       }
     }
@@ -113,22 +117,20 @@ class Table extends Component {
   finishTdEdit = (TD, isOk) => {
     const { state } = this;
     const td = TD;
-    if (isOk) {
-      td.innerHTML = td.firstChild.value;
-    } else {
-      td.innerHTML = state.editingTd.data;
-    }
+    td.innerHTML = (isOk) ? td.firstChild.value : state.editingTd.data;
     td.classList.remove('edit-td');
     this.setState({
       editingTd: null,
     });
   };
 
+  authDate = (authActive, redirect, component) => (authActive === false ? <Redirect to={redirect} /> : component);
+
   render() {
     const { props } = this;
-    return (props.authActive === false)
-      ? (<Redirect to="/login" />)
-      : (
+    return this.authDate(props.authActive,
+      '/login',
+      (
         <section className="full-section">
           <h1>Таблицы</h1>
           <ol>
@@ -155,7 +157,7 @@ class Table extends Component {
           </div>
           { this.showState() }
         </section>
-      );
+      ));
   }
 }
 

@@ -20,10 +20,12 @@ class Login extends Component {
     let error = false;
     let authUser = null;
     for (let i = 0; i < auth.length; i += 1) {
-      if ((auth[i].username === login) && (auth[i].password === password)) {
-        error = false;
-        authUser = auth[i];
-        break;
+      if (auth[i].username === login) {
+        if (auth[i].password === password) {
+          error = false;
+          authUser = auth[i];
+          break;
+        } error = true;
       } error = true;
     }
     this.authState(error, authUser);
@@ -59,11 +61,13 @@ class Login extends Component {
     });
   };
 
+  noAuthDate = (authActive, redirect, component) => (authActive === false ? component : <Redirect to={redirect} />);
+
   render() {
     const { props, state } = this;
-    return (props.authActive === true)
-      ? (<Redirect to="/profile" />)
-      : (
+    return this.noAuthDate(props.authActive,
+      '/profile',
+      (
         <div className="login">
           <form>
             <h2>Please login</h2>
@@ -86,7 +90,7 @@ class Login extends Component {
             </div>
           </form>
         </div>
-      );
+      ));
   }
 }
 

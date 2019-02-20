@@ -5,16 +5,18 @@ import { connect } from 'react-redux';
 import Table from './Table';
 import './style.css';
 
+const authDate = (authActive, redirect, component) => (authActive === false ? <Redirect to={redirect} /> : component);
+
 function Profile(props) {
   const prop = props;
-  return (prop.authActive === false)
-    ? (<Redirect to="/login" />)
-    : (
+  return authDate(prop.authActive,
+    '/login',
+    (
       <section className="full-section">
         <h1>Profile</h1>
         <Table authActive={prop.authActive} authUser={prop.authUser} />
       </section>
-    );
+    ));
 }
 
 const mapStateToProps = state => ({
