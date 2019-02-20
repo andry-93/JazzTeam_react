@@ -30,13 +30,9 @@ export default class App extends Component {
 
   showMenu = () => {
     const { state } = this;
-    if (!state.isOpen) {
-      if (this.asideEl) {
-        this.asideEl.classList.add('hide_aside');
-      }
-    } else if (this.asideEl) {
-      this.asideEl.classList.remove('hide_aside');
-    }
+    return (!state.isOpen)
+      ? this.asideEl.classList.add('hide_aside')
+      : this.asideEl.classList.remove('hide_aside');
   };
 
   render() {

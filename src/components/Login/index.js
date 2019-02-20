@@ -14,32 +14,37 @@ class Login extends Component {
   };
 
   onAuthorisation = (event) => {
-    const { props, state } = this;
+    const { state } = this;
     event.preventDefault();
     const { login, password } = state;
+    let error = false;
+    let authUser = null;
     for (let i = 0; i < auth.length; i += 1) {
       if ((auth[i].username === login) && (auth[i].password === password)) {
-        this.setState({
-          error: false,
-        });
-        props.setAuthFunction(true);
-        props.setUserFunction(auth[i]);
+        error = false;
+        authUser = auth[i];
         break;
-      } else if (state.error !== true) {
-        this.setState({
-          error: true,
-        });
-      }
+      } error = true;
     }
+    this.authState(error, authUser);
+  };
+
+  authState = (error, authUser) => {
+    const { props } = this;
+    this.setState({
+      error,
+    });
+    props.setAuthFunction(!error);
+    props.setUserFunction(error
+      ? {}
+      : authUser);
   };
 
   getError = () => {
     const { state } = this;
-    if (state.error) {
-      return (
-        <div className="login_error">Имя пользователя или пароль введены неверно</div>
-      );
-    } return undefined;
+    return (state.error)
+      ? <div className="login_error">Имя пользователя или пароль введены неверно</div>
+      : null;
   };
 
   updateLogin = (evt) => {
@@ -56,33 +61,32 @@ class Login extends Component {
 
   render() {
     const { props, state } = this;
-    if (props.authActive === true) {
-      return (<Redirect to="/profile" />);
-    }
-    return (
-      <div className="login">
-        <form>
-          <h2>Please login</h2>
-          <div id="auth">
-            <label htmlFor="name">
-              <span>Username:</span>
+    return (props.authActive === true)
+      ? (<Redirect to="/profile" />)
+      : (
+        <div className="login">
+          <form>
+            <h2>Please login</h2>
+            <div id="auth">
+              <label htmlFor="name">
+                <span>Username:</span>
+                <br />
+                <input type="name" value={state.login} onChange={evt => this.updateLogin(evt)} placeholder="username..." id="name" />
+              </label>
               <br />
-              <input type="name" value={state.login} onChange={evt => this.updateLogin(evt)} placeholder="username..." id="name" />
-            </label>
-            <br />
-            <label htmlFor="password">
-              <span>Password:</span>
-              <br />
-              <input type="password" value={state.password} onChange={evt => this.updatePassword(evt)} placeholder="password..." id="password" />
-            </label>
-          </div>
-          {this.getError()}
-          <div id="lower">
-            <input type="submit" onClick={this.onAuthorisation} value="Login" />
-          </div>
-        </form>
-      </div>
-    );
+              <label htmlFor="password">
+                <span>Password:</span>
+                <br />
+                <input type="password" value={state.password} onChange={evt => this.updatePassword(evt)} placeholder="password..." id="password" />
+              </label>
+            </div>
+            {this.getError()}
+            <div id="lower">
+              <input type="submit" onClick={this.onAuthorisation} value="Login" />
+            </div>
+          </form>
+        </div>
+      );
   }
 }
 

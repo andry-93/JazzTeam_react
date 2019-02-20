@@ -2,32 +2,19 @@ import React from 'react';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 
+import Table from './Table';
+import './style.css';
+
 function Profile(props) {
   const prop = props;
-  if (prop.authActive === false) {
-    return (<Redirect to="/login" />);
-  }
-  return (
-    <section className="full-section">
-      <h1>Profile</h1>
-      <table>
-        <tbody>
-          <tr>
-            <th>Username:</th>
-            <td>{prop.authUser.username}</td>
-          </tr>
-          <tr>
-            <th>First Name:</th>
-            <td>{prop.authUser.firstName}</td>
-          </tr>
-          <tr>
-            <th>Last Name:</th>
-            <td>{prop.authUser.lastName}</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  );
+  return (prop.authActive === false)
+    ? (<Redirect to="/login" />)
+    : (
+      <section className="full-section">
+        <h1>Profile</h1>
+        <Table authActive={prop.authActive} authUser={prop.authUser} />
+      </section>
+    );
 }
 
 const mapStateToProps = state => ({

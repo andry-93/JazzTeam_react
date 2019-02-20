@@ -126,37 +126,36 @@ class Table extends Component {
 
   render() {
     const { props } = this;
-    if (props.authActive === false) {
-      return (<Redirect to="/login" />);
-    }
-    return (
-      <section className="full-section">
-        <h1>Таблицы</h1>
-        <ol>
-          <li>Для редактирования таблицы, кликните дважды по нужной вам ячейке</li>
-          <li>Для выделения в таблице, используйте сочетание клавиш CTRL + Левая клавиша мыши</li>
-          <li>Число записей в таблице и число выделенных строк, можно посмотреть в строке состояния</li>
-          <li>Сайт адаптивный, потому scroll на таблице появится при уменьшении окна</li>
-        </ol>
-        <h2>Содержимое таблицы</h2>
-        <p>В качестве содержимого таблицы, были выбраны данные пользователей, которые используются для авторизации.</p>
-        <div role="grid" tabIndex={0} onClick={this.onClickCell} onKeyDown={this.onClickCell} onDoubleClick={this.editCell} style={{ width: '100%', height: '400px' }}>
-          <StickyTable>
-            <Row>
-              <Cell>ID</Cell>
-              <Cell>Username</Cell>
-              <Cell>Password</Cell>
-              <Cell>First Name</Cell>
-              <Cell>Last Name</Cell>
-              <Cell>Avatar IMG</Cell>
-              <Cell>Avatar SRC</Cell>
-            </Row>
-            { this.showList() }
-          </StickyTable>
-        </div>
-        { this.showState() }
-      </section>
-    );
+    return (props.authActive === false)
+      ? (<Redirect to="/login" />)
+      : (
+        <section className="full-section">
+          <h1>Таблицы</h1>
+          <ol>
+            <li>Для редактирования таблицы, кликните дважды по нужной вам ячейке</li>
+            <li>Для выделения в таблице, используйте сочетание клавиш CTRL + Левая клавиша мыши</li>
+            <li>Число записей в таблице и число выделенных строк, можно посмотреть в строке состояния</li>
+            <li>Сайт адаптивный, потому scroll на таблице появится при уменьшении окна</li>
+          </ol>
+          <h2>Содержимое таблицы</h2>
+          <p>В качестве содержимого таблицы, были выбраны данные пользователей, которые используются для авторизации.</p>
+          <div role="grid" tabIndex={0} onClick={this.onClickCell} onKeyDown={this.onClickCell} onDoubleClick={this.editCell} style={{ width: '100%', height: '400px' }}>
+            <StickyTable>
+              <Row>
+                <Cell>ID</Cell>
+                <Cell>Username</Cell>
+                <Cell>Password</Cell>
+                <Cell>First Name</Cell>
+                <Cell>Last Name</Cell>
+                <Cell>Avatar IMG</Cell>
+                <Cell>Avatar SRC</Cell>
+              </Row>
+              { this.showList() }
+            </StickyTable>
+          </div>
+          { this.showState() }
+        </section>
+      );
   }
 }
 
