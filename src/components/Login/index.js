@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
-import setAuthAction from '../../actions/actionAuth';
-import setUserAction from '../../actions/actionUser';
+import { setAuthAction, setUserAction } from '../../actions/actionAuth';
 import auth from '../../dateJSON';
 import './style.css';
 
