@@ -1,22 +1,18 @@
 import React from 'react';
-import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 
 import Table from './Table';
 import './style.css';
-
-const authDate = (authActive, redirect, component) => (authActive === false ? <Redirect to={redirect} /> : component);
+import RedirectAuth from '../../hoc/RedirectAuth';
 
 function Profile(props) {
   const prop = props;
-  return authDate(prop.authActive,
-    '/login',
-    (
-      <section className="full-section">
-        <h1>Profile</h1>
-        <Table authActive={prop.authActive} authUser={prop.authUser} />
-      </section>
-    ));
+  return (
+    <section className="full-section">
+      <h1>Profile</h1>
+      <Table authActive={prop.authActive} authUser={prop.authUser} />
+    </section>
+  );
 }
 
 const mapStateToProps = state => ({
@@ -24,4 +20,4 @@ const mapStateToProps = state => ({
   authUser: state.authInfo.authUser,
 });
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps)(RedirectAuth(Profile));

@@ -39,7 +39,7 @@ a:hover {
 
 aside {
   overflow: auto;
-  z-index: 1;
+  z-index: 6;
   width: 300px;
   background-color: rgba(51,102,153,0.95);
   position: fixed;

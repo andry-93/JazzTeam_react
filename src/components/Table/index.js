@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { StickyTable, Row, Cell } from 'react-sticky-table';
 import 'react-sticky-table/dist/react-sticky-table.css';
 import auth from '../../dateJSON';
 import './style.css';
+import RedirectAuth from '../../hoc/RedirectAuth';
 
 class Table extends Component {
   state = {
@@ -124,40 +124,35 @@ class Table extends Component {
     });
   };
 
-  authDate = (authActive, redirect, component) => (authActive === false ? <Redirect to={redirect} /> : component);
-
   render() {
-    const { props } = this;
-    return this.authDate(props.authActive,
-      '/login',
-      (
-        <section className="full-section">
-          <h1>Таблицы</h1>
-          <ol>
-            <li>Для редактирования таблицы, кликните дважды по нужной вам ячейке</li>
-            <li>Для выделения в таблице, используйте сочетание клавиш CTRL + Левая клавиша мыши</li>
-            <li>Число записей в таблице и число выделенных строк, можно посмотреть в строке состояния</li>
-            <li>Сайт адаптивный, потому scroll на таблице появится при уменьшении окна</li>
-          </ol>
-          <h2>Содержимое таблицы</h2>
-          <p>В качестве содержимого таблицы, были выбраны данные пользователей, которые используются для авторизации.</p>
-          <div role="grid" tabIndex={0} onClick={this.onClickCell} onKeyDown={this.onClickCell} onDoubleClick={this.editCell} style={{ width: '100%', height: '400px' }}>
-            <StickyTable>
-              <Row>
-                <Cell>ID</Cell>
-                <Cell>Username</Cell>
-                <Cell>Password</Cell>
-                <Cell>First Name</Cell>
-                <Cell>Last Name</Cell>
-                <Cell>Avatar IMG</Cell>
-                <Cell>Avatar SRC</Cell>
-              </Row>
-              { this.showList() }
-            </StickyTable>
-          </div>
-          { this.showState() }
-        </section>
-      ));
+    return (
+      <section className="full-section">
+        <h1>Таблицы</h1>
+        <ol>
+          <li>Для редактирования таблицы, кликните дважды по нужной вам ячейке</li>
+          <li>Для выделения в таблице, используйте сочетание клавиш CTRL + Левая клавиша мыши</li>
+          <li>Число записей в таблице и число выделенных строк, можно посмотреть в строке состояния</li>
+          <li>Сайт адаптивный, потому scroll на таблице появится при уменьшении окна</li>
+        </ol>
+        <h2>Содержимое таблицы</h2>
+        <p>В качестве содержимого таблицы, были выбраны данные пользователей, которые используются для авторизации.</p>
+        <div role="grid" tabIndex={0} onClick={this.onClickCell} onKeyDown={this.onClickCell} onDoubleClick={this.editCell} style={{ width: '100%', height: '400px' }}>
+          <StickyTable>
+            <Row>
+              <Cell>ID</Cell>
+              <Cell>Username</Cell>
+              <Cell>Password</Cell>
+              <Cell>First Name</Cell>
+              <Cell>Last Name</Cell>
+              <Cell>Avatar IMG</Cell>
+              <Cell>Avatar SRC</Cell>
+            </Row>
+            { this.showList() }
+          </StickyTable>
+        </div>
+        { this.showState() }
+      </section>
+    );
   }
 }
 
@@ -166,4 +161,4 @@ const mapStateToProps = state => ({
   authUser: state.authInfo.authUser,
 });
 
-export default connect(mapStateToProps)(Table);
+export default connect(mapStateToProps)(RedirectAuth(Table));
