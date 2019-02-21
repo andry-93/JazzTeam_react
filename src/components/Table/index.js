@@ -41,7 +41,7 @@ class Table extends Component {
       if (state.editingTd) return;
       this.makeTdEditable(target);
     }
-  }
+  };
 
   selectRow = (el) => {
     const { state } = this;
